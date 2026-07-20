@@ -165,6 +165,42 @@ Both receive an **Execution Context** with the Runner, the Player, the Speaker, 
 
 ---
 
+## Sample module (ready-to-use examples)
+
+The plugin ships an **optional** module, `SimpleDialogueSample`, with small, generic, copy-paste-ready
+classes so you can see everything working without writing a line of code. It depends only on the plugin
+and is completely safe to remove.
+
+| Class | Kind | What it shows |
+| --- | --- | --- |
+| `UDialogueSubsystem` | World Subsystem | A game-wide entry point: call **Start Dialogue** from anywhere and bind your UI once to its events. The recommended way to play dialogues. |
+| `UDialogueStarterComponent` | Actor Component | Drop it on an NPC, set its Dialogue, and call **Start Dialogue (Player)** on interact. The owning actor becomes the speaker. |
+| `UDialogueEffect_Log` | Effect | The simplest possible effect — prints a message when a node is entered. |
+| `UDialogueEffect_SetFlag` | Effect | Writes a named boolean into the run's Blackboard. |
+| `UDialogueCondition_CheckFlag` | Condition | Shows a choice only when that flag matches — pair it with *Set Flag*. |
+
+### Worked example: an NPC you can talk to
+
+1. Author a dialogue asset (see [Your first dialogue](#your-first-dialogue-in-5-minutes)).
+2. Add a **Dialogue Starter** component to your NPC actor and set its **Dialogue** to that asset.
+3. On interact (key press, overlap, ...), call **Start Dialogue** on the component, passing the player controller.
+4. In your HUD/widget, get the **Dialogue Subsystem** and bind **On Dialogue Node** / **On Dialogue Ended**
+   to show and hide your dialogue box. That's it — no runner wiring by hand.
+
+### Worked example: a state-dependent choice
+
+1. On an early node, add an **On Enter Effect → Set Flag** with `FlagName = MetGuard`, `bValue = true`.
+2. On a later Choice option, add a **Condition → Check Flag** with `FlagName = MetGuard`, `bExpected = true`.
+   That option now appears only after the player passed through the first node.
+
+### Removing the samples
+
+Don't want the examples in your build? Delete the `Source/SimpleDialogueSample` folder and remove the
+`"SimpleDialogueSample"` entry from `SimpleDialogue.uplugin`, then rebuild. The core plugin never
+depends on this module.
+
+---
+
 ## Troubleshooting
 
 **The plugin won't build / modules are missing.**
