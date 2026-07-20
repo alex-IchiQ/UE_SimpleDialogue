@@ -1,12 +1,12 @@
 {
 	"FileVersion": 3,
 	"Version": 1,
-	"VersionName": "0.1.0",
+	"VersionName": "1.1.0",
 	"FriendlyName": "Simple Dialogue",
 	"Description": "Node-based dialogue system with a custom graph editor.",
 	"Category": "Dialogue",
 	"CreatedBy": "IchiQ",
-	"CreatedByURL": "",
+	"CreatedByURL": "ichiq.dev",
 	"DocsURL": "",
 	"MarketplaceURL": "",
 	"SupportURL": "",
@@ -25,6 +25,11 @@
 			"Name": "SimpleDialogueEditor",
 			"Type": "Editor",
 			"LoadingPhase": "PostEngineInit"
+		},
+		{
+			"Name": "SimpleDialogueSample",
+			"Type": "Runtime",
+			"LoadingPhase": "Default"
 		}
 	]
 }
